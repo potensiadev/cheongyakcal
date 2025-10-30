@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, TrendingUp, Users, Calendar, Home, Share2 } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { ArrowLeft, TrendingUp, Users, Calendar, Home } from "lucide-react";
 
 interface ResultData {
   totalScore: number;
@@ -45,58 +44,6 @@ const CountUpAnimation = ({ end, duration = 800 }: { end: number; duration?: num
 };
 
 export const ResultScreen = ({ result, onBack }: ResultScreenProps) => {
-  useEffect(() => {
-    // Kakao SDK 초기화
-    const kakao = (window as any).Kakao;
-    if (kakao && !kakao.isInitialized()) {
-      // TODO: 실제 Kakao JavaScript 키로 교체 필요
-      kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY');
-    }
-  }, []);
-
-  const handleKakaoShare = () => {
-    const kakao = (window as any).Kakao;
-    if (!kakao) {
-      toast({
-        title: "공유 실패",
-        description: "카카오톡 공유 기능을 불러올 수 없습니다.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (!kakao.isInitialized()) {
-      toast({
-        title: "공유 실패",
-        description: "카카오톡 SDK가 초기화되지 않았습니다.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '내 청약가점 결과',
-        description: `총 ${result.totalScore}점 / 84점 (${getLevelText()} 등급)`,
-        imageUrl: 'https://lovable.dev/opengraph-image-p98pqg.png',
-        link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href,
-        },
-      },
-      buttons: [
-        {
-          title: '내 점수도 계산하기',
-          link: {
-            mobileWebUrl: window.location.origin,
-            webUrl: window.location.origin,
-          },
-        },
-      ],
-    });
-  };
-
   const getLevelColor = () => {
     switch (result.level) {
       case "high":
@@ -154,7 +101,7 @@ export const ResultScreen = ({ result, onBack }: ResultScreenProps) => {
 
   return (
     <div className="w-full max-w-lg mx-auto px-4 py-8 animate-fade-in">
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6">
         <Button
           variant="ghost"
           onClick={onBack}
@@ -162,15 +109,6 @@ export const ResultScreen = ({ result, onBack }: ResultScreenProps) => {
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           다시 계산하기
-        </Button>
-        
-        <Button
-          variant="outline"
-          onClick={handleKakaoShare}
-          className="hover:bg-secondary"
-        >
-          <Share2 className="mr-2 h-4 w-4" />
-          카카오톡 공유
         </Button>
       </div>
 

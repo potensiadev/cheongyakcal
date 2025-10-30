@@ -54,6 +54,49 @@ export const ResultScreen = ({ result, onBack }: ResultScreenProps) => {
     }
   }, []);
 
+  const handleKakaoShare = () => {
+    const kakao = (window as any).Kakao;
+    if (!kakao) {
+      toast({
+        title: "공유 실패",
+        description: "카카오톡 공유 기능을 불러올 수 없습니다.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!kakao.isInitialized()) {
+      toast({
+        title: "공유 실패",
+        description: "카카오톡 SDK가 초기화되지 않았습니다.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '내 청약가점 결과',
+        description: `총 ${result.totalScore}점 / 84점 (${getLevelText()} 등급)`,
+        imageUrl: 'https://lovable.dev/opengraph-image-p98pqg.png',
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href,
+        },
+      },
+      buttons: [
+        {
+          title: '내 점수도 계산하기',
+          link: {
+            mobileWebUrl: window.location.origin,
+            webUrl: window.location.origin,
+          },
+        },
+      ],
+    });
+  };
+
   const getLevelColor = () => {
     switch (result.level) {
       case "high":

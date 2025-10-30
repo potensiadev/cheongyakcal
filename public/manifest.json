@@ -1,0 +1,23 @@
+{
+  "name": "청약가점 계산기",
+  "short_name": "청약가점",
+  "description": "무주택기간, 부양가족, 청약통장 가입기간으로 나의 청약가점을 간편하게 계산해보세요",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

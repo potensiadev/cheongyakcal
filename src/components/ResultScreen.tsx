@@ -50,7 +50,7 @@ export const ResultScreen = ({ result, onBack }: ResultScreenProps) => {
     const kakao = (window as any).Kakao;
     if (kakao && !kakao.isInitialized()) {
       // TODO: 실제 Kakao JavaScript 키로 교체 필요
-      kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY');
+      kakao.init('e3aa891d6d5d33a62d47dfca38e29ebd');
     }
   }, []);
 

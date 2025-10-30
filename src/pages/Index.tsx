@@ -1,12 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { CalculatorForm } from "@/components/CalculatorForm";
+import { ResultScreen } from "@/components/ResultScreen";
+import { calculateScore } from "@/utils/calculator";
+
+interface FormData {
+  birthDate: string;
+  homelessYears: string;
+  dependents: string;
+  subscriptionDate: string;
+}
+
+interface ResultData {
+  totalScore: number;
+  homelessScore: number;
+  dependentsScore: number;
+  subscriptionScore: number;
+  level: "low" | "medium" | "high";
+}
 
 const Index = () => {
+  const [result, setResult] = useState<ResultData | null>(null);
+
+  const handleCalculate = (formData: FormData) => {
+    const calculatedResult = calculateScore(formData);
+    setResult(calculatedResult);
+  };
+
+  const handleBack = () => {
+    setResult(null);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {result ? (
+        <ResultScreen result={result} onBack={handleBack} />
+      ) : (
+        <CalculatorForm onCalculate={handleCalculate} />
+      )}
     </div>
   );
 };

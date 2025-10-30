@@ -26,6 +26,9 @@ export const CalculatorForm = ({ onCalculate }: CalculatorFormProps) => {
 
   const [error, setError] = useState("");
 
+  // 현재 날짜를 YYYY-MM-DD 형식으로 가져오기
+  const today = new Date().toISOString().split('T')[0];
+
   const handleChange = (field: keyof FormData) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -73,6 +76,8 @@ export const CalculatorForm = ({ onCalculate }: CalculatorFormProps) => {
               <Input
                 id="birthDate"
                 type="date"
+                min="1900-01-01"
+                max={today}
                 value={formData.birthDate}
                 onChange={handleChange("birthDate")}
                 className="h-14 text-base pr-12"
@@ -130,6 +135,8 @@ export const CalculatorForm = ({ onCalculate }: CalculatorFormProps) => {
               <Input
                 id="subscriptionDate"
                 type="date"
+                min="1900-01-01"
+                max={today}
                 value={formData.subscriptionDate}
                 onChange={handleChange("subscriptionDate")}
                 className="h-14 text-base pr-12"

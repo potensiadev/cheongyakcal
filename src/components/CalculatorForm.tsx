@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { Calendar } from "lucide-react";
+import { Calendar, BookOpen } from "lucide-react";
 
 interface FormData {
   birthDate: string;
@@ -161,8 +162,17 @@ export const CalculatorForm = ({ onCalculate }: CalculatorFormProps) => {
         </form>
       </Card>
 
-      <div className="mt-6 text-center text-xs text-muted-foreground">
-        <p>청약가점은 무주택기간, 부양가족, 청약통장 가입기간으로 산정됩니다.</p>
+      <div className="mt-6 space-y-4">
+        <div className="text-center text-xs text-muted-foreground">
+          <p>청약가점은 무주택기간, 부양가족, 청약통장 가입기간으로 산정됩니다.</p>
+        </div>
+        
+        <Link to="/blog">
+          <Button variant="outline" className="w-full h-12">
+            <BookOpen className="mr-2 h-4 w-4" />
+            청약 꿀팁 블로그 보기
+          </Button>
+        </Link>
       </div>
     </div>
   );

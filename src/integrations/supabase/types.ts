@@ -19,9 +19,9 @@ export type Database = {
           category: string
           content: string
           created_at: string
-          excerpt: string
+          excerpt: string | null
           id: string
-          published: boolean
+          published: boolean | null
           slug: string
           thumbnail: string | null
           title: string
@@ -31,9 +31,9 @@ export type Database = {
           category: string
           content: string
           created_at?: string
-          excerpt: string
+          excerpt?: string | null
           id?: string
-          published?: boolean
+          published?: boolean | null
           slug: string
           thumbnail?: string | null
           title: string
@@ -43,9 +43,9 @@ export type Database = {
           category?: string
           content?: string
           created_at?: string
-          excerpt?: string
+          excerpt?: string | null
           id?: string
-          published?: boolean
+          published?: boolean | null
           slug?: string
           thumbnail?: string | null
           title?: string
